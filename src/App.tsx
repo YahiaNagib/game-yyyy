@@ -2,6 +2,7 @@ import "./App.css";
 
 import { Button, Grid, GridItem, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
+import GameGrid from "./components/GameGrid";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         aside
       </GridItem>
       <GridItem area="main" bg="dodgerblue">
-        main
+        <GameGrid />
       </GridItem>
     </Grid>
   );
