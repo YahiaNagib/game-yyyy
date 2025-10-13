@@ -9,11 +9,11 @@ interface Props {
 
 const GameCard = ({ game }: Props) => {
   return (
-    <Card.Root borderRadius={10} overflow="hidden" alignItems="flex-start">
-      <Card.Header>
+    <Card.Root>
+      <Card.Header padding={0}>
         <Image src={game.background_image} />
       </Card.Header>
-      <Card.Body alignItems="flex-start" width="100%">
+      <Card.Body alignItems="flex-start">
         <Heading fontSize="2xl" fontWeight={"bold"}>
           {game.name}
         </Heading>
