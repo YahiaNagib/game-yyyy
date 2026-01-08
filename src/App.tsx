@@ -11,6 +11,7 @@ function App() {
         base: `"nav" "main"`,
         lg: `"nav nav" "aside main"`,
       }}
+      gap={"12px"}
     >
       <GridItem area="nav">
         <Navbar />
