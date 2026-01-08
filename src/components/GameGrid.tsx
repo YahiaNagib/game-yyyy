@@ -7,9 +7,9 @@ import GameCardContainer from "./GameCardContainer";
 import ButtonDropdown from "./ButtonDropdown";
 
 const GameGrid = () => {
-  const { games, error, isLoading } = useGames();
+  const { data: games, error, isLoading } = useGames();
 
-  const { platforms } = usePlatforms();
+  const { data: platforms } = usePlatforms();
 
   return (
     <>

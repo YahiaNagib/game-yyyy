@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "../hooks/useGames";
+import { Platform } from "../hooks/usePlatforms";
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 
