@@ -1,4 +1,4 @@
-import { Platform } from "@/hooks/useGames";
+import { Platform } from "../hooks/usePlatforms";
 import { HStack, Icon } from "@chakra-ui/react";
 import {
   FaWindows,
@@ -7,6 +7,8 @@ import {
   FaApple,
   FaLinux,
   FaAndroid,
+  FaGooglePlay,
+  FaQuestion,
 } from "react-icons/fa";
 
 import { MdPhoneIphone } from "react-icons/md";
@@ -29,6 +31,13 @@ const PlatformIconList = ({ platforms }: Props) => {
     ios: MdPhoneIphone,
     web: BsGlobe,
     android: FaAndroid,
+    xbox360: FaXbox,
+    macos: FaApple,
+    unknown: FaQuestion,
+  };
+
+  const getIcon = (slug: string) => {
+    return iconMap.hasOwnProperty(slug) ? slug : "unknown";
   };
 
   return (
@@ -36,7 +45,7 @@ const PlatformIconList = ({ platforms }: Props) => {
       {platforms.map((platform) => (
         <Icon
           key={platform.id}
-          as={iconMap[platform.slug as keyof IconType]}
+          as={iconMap[getIcon(platform.slug) as keyof IconType]}
           color="gray.500"
         />
       ))}

@@ -38,13 +38,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                   textDecoration: "underline",
                 }}
                 onClick={() => onSelectGenre(genre)}
-                fontWeight={
-                  selectedGenre
-                    ? genre.id === selectedGenre.id
-                      ? "bold"
-                      : "normal"
-                    : "normal"
-                }
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               >
                 {genre.name}
               </Text>

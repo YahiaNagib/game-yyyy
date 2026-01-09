@@ -26,7 +26,7 @@ const GameGrid = ({ selectedGenre }: Props) => {
         fontSize={"40px"}
         fontWeight={"bold"}
       >
-        Games
+        {selectedGenre?.name} Games
       </Heading>
       <ButtonDropdown text="Platfroms" items={platforms} />
       <ButtonDropdown text="Order by: Relevance" items={platforms} />
@@ -48,11 +48,12 @@ const GameGrid = ({ selectedGenre }: Props) => {
             <GameCardSkeleton />
           </>
         )}
-        {games.map((game) => (
-          <GameCardContainer key={game.id}>
-            <GameCard key={game.id} game={game} />
-          </GameCardContainer>
-        ))}
+        {!isLoading &&
+          games.map((game) => (
+            <GameCardContainer key={game.id}>
+              <GameCard key={game.id} game={game} />
+            </GameCardContainer>
+          ))}
       </SimpleGrid>
     </>
   );

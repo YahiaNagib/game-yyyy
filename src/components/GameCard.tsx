@@ -9,6 +9,11 @@ interface Props {
 }
 
 const GameCard = ({ game }: Props) => {
+  // const getPlatforms = (game: Game) => {
+  //   console.log(game.parent_platforms.map((p) => p.platform));
+  //   return game.parent_platforms.map((p) => p.platform);
+  // };
+
   return (
     <Card.Root>
       <Card.Header padding={0}>
