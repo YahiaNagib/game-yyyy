@@ -5,9 +5,14 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import ButtonDropdown from "./ButtonDropdown";
+import { Genre } from "../hooks/useGenres";
 
-const GameGrid = () => {
-  const { data: games, error, isLoading } = useGames();
+interface Props {
+  selectedGenre: Genre | null;
+}
+
+const GameGrid = ({ selectedGenre }: Props) => {
+  const { data: games, error, isLoading } = useGames(selectedGenre);
 
   const { data: platforms } = usePlatforms();
 
@@ -44,7 +49,7 @@ const GameGrid = () => {
           </>
         )}
         {games.map((game) => (
-          <GameCardContainer>
+          <GameCardContainer key={game.id}>
             <GameCard key={game.id} game={game} />
           </GameCardContainer>
         ))}
