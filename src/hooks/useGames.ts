@@ -9,11 +9,6 @@ export interface Game {
   metacritic: number;
 }
 
-export interface FetchGamesResponse {
-  count: number;
-  results: Game[];
-}
-
 const useGames = () => useData<Game>("/games");
 
 export default useGames;

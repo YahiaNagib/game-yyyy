@@ -28,10 +28,12 @@ const GameGrid = () => {
       <SimpleGrid
         columns={{ lg: 3, sm: 1, md: 2, xl: 4 }}
         padding="10px"
-        gap="40px"
+        gap="20px"
       >
         {isLoading && (
           <>
+            <GameCardSkeleton />
+            <GameCardSkeleton />
             <GameCardSkeleton />
             <GameCardSkeleton />
             <GameCardSkeleton />

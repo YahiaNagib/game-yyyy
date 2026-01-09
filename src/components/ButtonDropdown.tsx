@@ -13,12 +13,11 @@ const ButtonDropdown = ({ items, text }: Props) => {
     <Menu.Root>
       <Menu.Trigger asChild>
         <Button
-          variant="outline"
+          variant="subtle"
           size="sm"
           margin={"10px"}
           fontSize={"17px"}
-          backgroundColor={"rgb(237, 237, 237)"}
-          _hover={{ backgroundColor: "#D3D3D3" }}
+          borderRadius={"5px"}
           outline={"none"}
         >
           {text}
