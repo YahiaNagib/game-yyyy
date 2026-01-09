@@ -16,6 +16,7 @@ const GameGrid = () => {
       {error && <Text>{error}</Text>}
       <Heading
         marginLeft={"10px"}
+        marginBottom={"10px"}
         padding={"10px 0"}
         fontSize={"40px"}
         fontWeight={"bold"}
