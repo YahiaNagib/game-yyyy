@@ -1,41 +1,32 @@
 import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
-import usePlatforms from "../hooks/usePlatforms";
+import usePlatforms, { Platform } from "../hooks/usePlatforms";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
-import ButtonDropdown from "./ButtonDropdown";
+import PlatformSelector from "./PlatformSelector";
 import { Genre } from "../hooks/useGenres";
+import { useState } from "react";
 
 interface Props {
   selectedGenre: Genre | null;
 }
 
 const GameGrid = ({ selectedGenre }: Props) => {
-  const { data: games, error, isLoading } = useGames(selectedGenre);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
+  const onSelectPlatform = (platform: Platform) => setSelectedPlatform(platform);
 
-  const { data: platforms } = usePlatforms();
+  const { data: games, error, isLoading } = useGames(selectedGenre, selectedPlatform);
 
   return (
     <>
       {error && <Text>{error}</Text>}
-      <Heading
-        marginLeft={"10px"}
-        marginBottom={"10px"}
-        padding={"10px 0"}
-        fontSize={"40px"}
-        fontWeight={"bold"}
-      >
-        {selectedGenre?.name} Games
+      <Heading marginLeft={"10px"} marginBottom={"10px"} padding={"10px 0"} fontSize={"40px"} fontWeight={"bold"}>
+        {selectedPlatform?.name} {selectedGenre?.name} Games
       </Heading>
-      <ButtonDropdown text="Platfroms" items={platforms} />
-      <ButtonDropdown text="Order by: Relevance" items={platforms} />
+      <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={onSelectPlatform} />
 
-      <SimpleGrid
-        columns={{ lg: 3, sm: 1, md: 2, xl: 4 }}
-        padding="10px"
-        gap="20px"
-      >
+      <SimpleGrid columns={{ lg: 3, sm: 1, md: 2, xl: 4 }} padding="10px" gap="20px">
         {isLoading && (
           <>
             <GameCardSkeleton />
