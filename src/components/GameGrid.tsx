@@ -7,6 +7,7 @@ import GameCardContainer from "./GameCardContainer";
 import PlatformSelector from "./PlatformSelector";
 import { Genre } from "../hooks/useGenres";
 import { useState } from "react";
+import SortSelector from "./SortSelector";
 
 interface Props {
   selectedGenre: Genre | null;
@@ -25,6 +26,7 @@ const GameGrid = ({ selectedGenre }: Props) => {
         {selectedPlatform?.name} {selectedGenre?.name} Games
       </Heading>
       <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={onSelectPlatform} />
+      <SortSelector />
 
       <SimpleGrid columns={{ lg: 3, sm: 1, md: 2, xl: 4 }} padding="10px" gap="20px">
         {isLoading && (
