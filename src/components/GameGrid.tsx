@@ -15,9 +15,12 @@ interface Props {
 
 const GameGrid = ({ selectedGenre }: Props) => {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
-  const onSelectPlatform = (platform: Platform) => setSelectedPlatform(platform);
+  const [selectedOrderBy, setSelectedOrderBy] = useState("");
 
-  const { data: games, error, isLoading } = useGames(selectedGenre, selectedPlatform);
+  const onSelectPlatform = (platform: Platform) => setSelectedPlatform(platform);
+  const onSelectOrderBy = (selectedOrderBy: string) => setSelectedOrderBy(selectedOrderBy);
+
+  const { data: games, error, isLoading } = useGames(selectedGenre, selectedPlatform, selectedOrderBy);
 
   return (
     <>
@@ -26,7 +29,7 @@ const GameGrid = ({ selectedGenre }: Props) => {
         {selectedPlatform?.name} {selectedGenre?.name} Games
       </Heading>
       <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={onSelectPlatform} />
-      <SortSelector />
+      <SortSelector selectedOrderBy={selectedOrderBy} onSelectOrder={onSelectOrderBy} />
 
       <SimpleGrid columns={{ lg: 3, sm: 1, md: 2, xl: 4 }} padding="10px" gap="20px">
         {isLoading && (

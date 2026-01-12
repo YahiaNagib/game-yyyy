@@ -2,10 +2,22 @@ import React, { useState } from "react";
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 
-const SortSelector = () => {
-  const [orderBy, setOrderBy] = useState("Relevance");
+interface Props {
+  selectedOrderBy: string;
+  onSelectOrder: (selectedOrderBy: string) => void;
+}
 
-  const menuList = ["Relevance", "Date added", "Name", "Release date", "Popularity", "Average rating"];
+const SortSelector = ({ selectedOrderBy, onSelectOrder }: Props) => {
+  const menuList = [
+    { value: "", label: "Relevance" },
+    { value: "-added", label: "Date added" },
+    { value: "name", label: "Name" },
+    { value: "-released", label: "Release date" },
+    { value: "-metacritic", label: "Popularity" },
+    { value: "-rating", label: "Average rating" },
+  ];
+
+  const currentSelectedOrder = menuList.find((item) => item.value === selectedOrderBy);
 
   return (
     <Menu.Root>
@@ -19,7 +31,7 @@ const SortSelector = () => {
           outline={"none"}
           padding={"18px"}
         >
-          Order by: {orderBy}
+          Order by: {currentSelectedOrder?.label}
           <FaChevronDown style={{ width: "14px", height: "14px" }} />
         </Button>
       </Menu.Trigger>
@@ -28,14 +40,14 @@ const SortSelector = () => {
           <Menu.Content width={"230px"}>
             {menuList.map((item) => (
               <Menu.Item
-                key={item}
-                value={item}
+                key={item.value}
+                value={item.value}
                 fontSize="15px"
                 padding={"8px"}
                 cursor={"pointer"}
-                onClick={() => setOrderBy(item)}
+                onClick={() => onSelectOrder(item.value)}
               >
-                {item}
+                {item.label}
               </Menu.Item>
             ))}
           </Menu.Content>
