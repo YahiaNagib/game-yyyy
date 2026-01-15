@@ -5,10 +5,13 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
-import { Platform } from "./hooks/usePlatforms";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+
+  const [searchText, setSearchText] = useState("");
+
+  const onSearch = (text: string) => setSearchText(text);
 
   const onSelectGenre = (genre: Genre) => setSelectedGenre(genre);
 
@@ -21,13 +24,13 @@ function App() {
       gap={"12px"}
     >
       <GridItem area="nav">
-        <Navbar />
+        <Navbar onSearch={onSearch} />
       </GridItem>
       <GridItem area="aside" display={{ base: "none", lg: "block" }}>
         <GenreList selectedGenre={selectedGenre} onSelectGenre={onSelectGenre} />
       </GridItem>
       <GridItem area="main">
-        <GameGrid selectedGenre={selectedGenre} />
+        <GameGrid selectedGenre={selectedGenre} searchText={searchText} />
       </GridItem>
     </Grid>
   );

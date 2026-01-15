@@ -11,16 +11,17 @@ import SortSelector from "./SortSelector";
 
 interface Props {
   selectedGenre: Genre | null;
+  searchText: string;
 }
 
-const GameGrid = ({ selectedGenre }: Props) => {
+const GameGrid = ({ selectedGenre, searchText }: Props) => {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
   const [selectedOrderBy, setSelectedOrderBy] = useState("");
 
   const onSelectPlatform = (platform: Platform) => setSelectedPlatform(platform);
   const onSelectOrderBy = (selectedOrderBy: string) => setSelectedOrderBy(selectedOrderBy);
 
-  const { data: games, error, isLoading } = useGames(selectedGenre, selectedPlatform, selectedOrderBy);
+  const { data: games, error, isLoading } = useGames(selectedGenre, selectedPlatform, selectedOrderBy, searchText);
 
   return (
     <>
