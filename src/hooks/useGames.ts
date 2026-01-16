@@ -8,6 +8,7 @@ export interface Game {
   parent_platforms: { platform: Platform }[]; // array of objects, each object has a property called platform
   // and this property is of type Platform.
   metacritic: number;
+  rating_top: number;
 }
 
 const useGames = (
