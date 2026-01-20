@@ -1,36 +1,35 @@
 import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import { Platform } from "../hooks/usePlatforms";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import PlatformSelector from "./PlatformSelector";
 import { Genre } from "../hooks/useGenres";
-import { useState } from "react";
 import SortSelector from "./SortSelector";
+import { GameQuery } from "@/App";
 
 interface Props {
-  selectedGenre: Genre | null;
-  searchText: string;
+  gameQuery: GameQuery;
+  // selectedGenre: Genre | null;
+  // selectedPlatform: Platform | null;
+  // searchText: string;
+  // selectedOrderBy: string;
+  onSelectPlatform: (platform: Platform) => void;
+  onSelectOrderBy: (selectedOrderBy: string) => void;
 }
 
-const GameGrid = ({ selectedGenre, searchText }: Props) => {
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
-  const [selectedOrderBy, setSelectedOrderBy] = useState("");
-
-  const onSelectPlatform = (platform: Platform) => setSelectedPlatform(platform);
-  const onSelectOrderBy = (selectedOrderBy: string) => setSelectedOrderBy(selectedOrderBy);
-
-  const { data: games, error, isLoading } = useGames(selectedGenre, selectedPlatform, selectedOrderBy, searchText);
+const GameGrid = ({ gameQuery, onSelectPlatform, onSelectOrderBy }: Props) => {
+  const { data: games, error, isLoading } = useGames(gameQuery);
 
   return (
     <>
       {error && <Text>{error}</Text>}
       <Heading marginLeft={"10px"} marginBottom={"10px"} padding={"10px 0"} fontSize={"40px"} fontWeight={"bold"}>
-        {selectedPlatform?.name} {selectedGenre?.name} Games
+        {gameQuery.platform?.name} {gameQuery.genre?.name} Games
       </Heading>
-      <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={onSelectPlatform} />
-      <SortSelector selectedOrderBy={selectedOrderBy} onSelectOrder={onSelectOrderBy} />
+      <PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={onSelectPlatform} />
+      <SortSelector selectedOrderBy={gameQuery.sortOrder} onSelectOrder={onSelectOrderBy} />
 
       <SimpleGrid columns={{ lg: 3, sm: 1, md: 2, xl: 4 }} padding="10px" gap="20px">
         {isLoading && (

@@ -31,7 +31,7 @@ const SortSelector = ({ selectedOrderBy, onSelectOrder }: Props) => {
           outline={"none"}
           padding={"18px"}
         >
-          Order by: {currentSelectedOrder?.label}
+          Order by: {currentSelectedOrder?.label || "Relevance"}
           <FaChevronDown style={{ width: "14px", height: "14px" }} />
         </Button>
       </Menu.Trigger>

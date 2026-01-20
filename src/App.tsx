@@ -5,15 +5,24 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
+import { Platform } from "./hooks/usePlatforms";
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+  searchText: string;
+  sortOrder: string;
+}
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
-  const [searchText, setSearchText] = useState("");
+  const onSelectGenre = (genre: Genre) => setGameQuery({ ...gameQuery, genre });
 
-  const onSearch = (text: string) => setSearchText(text);
+  const onSelectPlatform = (platform: Platform) => setGameQuery({ ...gameQuery, platform });
 
-  const onSelectGenre = (genre: Genre) => setSelectedGenre(genre);
+  const onSelectOrderBy = (sortOrder: string) => setGameQuery({ ...gameQuery, sortOrder });
+
+  const onSearch = (sortOrder: string) => setGameQuery({ ...gameQuery, sortOrder });
 
   return (
     <Grid
@@ -27,10 +36,14 @@ function App() {
         <Navbar onSearch={onSearch} />
       </GridItem>
       <GridItem area="aside" display={{ base: "none", lg: "block" }}>
-        <GenreList selectedGenre={selectedGenre} onSelectGenre={onSelectGenre} />
+        <GenreList selectedGenre={gameQuery.genre} onSelectGenre={onSelectGenre} />
       </GridItem>
       <GridItem area="main">
-        <GameGrid selectedGenre={selectedGenre} searchText={searchText} />
+        <GameGrid
+          gameQuery={gameQuery}
+          onSelectPlatform={onSelectPlatform}
+          onSelectOrderBy={onSelectOrderBy}
+        />
       </GridItem>
     </Grid>
   );
