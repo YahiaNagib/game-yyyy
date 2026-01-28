@@ -24,12 +24,12 @@ const GameGrid = ({ gameQuery, onSelectPlatform, onSelectOrderBy }: Props) => {
 
   return (
     <>
-      {error && <Text>{error}</Text>}
       <Heading marginLeft={"10px"} marginBottom={"10px"} padding={"10px 0"} fontSize={"40px"} fontWeight={"bold"}>
         {gameQuery.platform?.name} {gameQuery.genre?.name} Games
       </Heading>
       <PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={onSelectPlatform} />
       <SortSelector selectedOrderBy={gameQuery.sortOrder} onSelectOrder={onSelectOrderBy} />
+      {error && <Text>{error.message}</Text>}
 
       <SimpleGrid columns={{ lg: 3, sm: 1, md: 2, xl: 4 }} padding="10px" gap="20px">
         {isLoading && (
@@ -45,7 +45,7 @@ const GameGrid = ({ gameQuery, onSelectPlatform, onSelectOrderBy }: Props) => {
           </>
         )}
         {!isLoading &&
-          games.map((game) => (
+          games?.map((game) => (
             <GameCardContainer key={game.id}>
               <GameCard key={game.id} game={game} />
             </GameCardContainer>

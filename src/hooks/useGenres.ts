@@ -1,5 +1,5 @@
 import { CanceledError } from "axios";
-import apiClient from "../services/api-client";
+import APIClient from "../services/api-client";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -9,14 +9,11 @@ export interface Genre {
   image_background: string;
 }
 
-interface FetchGenreResponse {
-  count: number;
-  results: Genre[];
-}
+const apiClient = new APIClient<Genre>("/genres");
 
 // const useGenres = () => useData<Genre>("/genres");
 
-const useGenres = () => {
+const useGenres = () =>
   // const [data, setData] = useState<Genre[]>([]);
   // const [error, setError] = useState("");
   // const [isLoading, setLoading] = useState(true);
@@ -47,11 +44,9 @@ const useGenres = () => {
   // }, []);
   // return { data, error, isLoading };
 
-  return useQuery<Genre[], Error>({
+  useQuery<Genre[], Error>({
     queryKey: ["genres"],
-    queryFn: () => apiClient.get("/genres").then((res) => res.data.results),
+    queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000,
   });
-};
-
 export default useGenres;
