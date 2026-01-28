@@ -18,7 +18,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
       </Heading>
       {isLoading && <Spinner />}
       <ul>
-        {genres.map((genre) => (
+        {genres?.map((genre) => (
           <li key={genre.id}>
             <HStack key={genre.id} alignItems={"center"} marginBottom={"10px"}>
               <Image

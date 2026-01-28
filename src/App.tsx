@@ -9,8 +9,8 @@ import { Platform } from "./hooks/usePlatforms";
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
-  searchText: string;
   sortOrder: string;
+  searchText: string;
 }
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
 
   const onSelectOrderBy = (sortOrder: string) => setGameQuery({ ...gameQuery, sortOrder });
 
-  const onSearch = (sortOrder: string) => setGameQuery({ ...gameQuery, sortOrder });
+  const onSearch = (searchText: string) => setGameQuery({ ...gameQuery, searchText });
 
   return (
     <Grid
@@ -39,11 +39,7 @@ function App() {
         <GenreList selectedGenre={gameQuery.genre} onSelectGenre={onSelectGenre} />
       </GridItem>
       <GridItem area="main">
-        <GameGrid
-          gameQuery={gameQuery}
-          onSelectPlatform={onSelectPlatform}
-          onSelectOrderBy={onSelectOrderBy}
-        />
+        <GameGrid gameQuery={gameQuery} onSelectPlatform={onSelectPlatform} onSelectOrderBy={onSelectOrderBy} />
       </GridItem>
     </Grid>
   );
