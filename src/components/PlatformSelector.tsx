@@ -39,7 +39,7 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
             <Menu.Item value="All" fontSize="15px" padding={"8px"} cursor={"pointer"}>
               All
             </Menu.Item>
-            {platforms.map((platform) => (
+            {platforms?.map((platform) => (
               <Menu.Item
                 key={platform.id}
                 value={platform.name}

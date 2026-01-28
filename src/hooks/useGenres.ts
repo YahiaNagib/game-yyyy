@@ -50,7 +50,7 @@ const useGenres = () => {
   return useQuery<Genre[], Error>({
     queryKey: ["genres"],
     queryFn: () => apiClient.get("/genres").then((res) => res.data.results),
-    staleTime: 10 * 1000,
+    staleTime: 24 * 60 * 60 * 1000,
   });
 };
 
