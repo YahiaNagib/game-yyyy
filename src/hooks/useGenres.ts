@@ -1,5 +1,5 @@
 import { CanceledError } from "axios";
-import APIClient from "../services/api-client";
+import APIClient, { FetchResponse } from "../services/api-client";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -44,7 +44,7 @@ const useGenres = () =>
   // }, []);
   // return { data, error, isLoading };
 
-  useQuery<Genre[], Error>({
+  useQuery<FetchResponse<Genre>, Error>({
     queryKey: ["genres"],
     queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000,
