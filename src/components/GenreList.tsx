@@ -4,11 +4,11 @@ import getCroppedImageUrl from "../services/image-url";
 import { useState } from "react";
 
 interface Props {
-  selectedGenre: Genre | null;
-  onSelectGenre: (genre: Genre) => void;
+  selectedGenreId: number;
+  onSelectGenre: (genreId: number) => void;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
   const { data: genres, isLoading } = useGenres();
 
   return (
@@ -32,8 +32,8 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                   cursor: "pointer",
                   textDecoration: "underline",
                 }}
-                onClick={() => onSelectGenre(genre)}
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                onClick={() => onSelectGenre(genre.id)}
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
               >
                 {genre.name}
               </Text>

@@ -4,16 +4,16 @@ import { Button, Menu, Portal } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 
 interface Props {
-  selectedPlatform: Platform | null;
-  onSelectPlatform: (platform: Platform) => void;
+  selectedPlatformId: number;
+  onSelectPlatform: (platformId: number) => void;
 }
 
-const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
+const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
   const [selectedPlatformName, setSelectedPlatformName] = useState("Platforms");
   const { data: platforms } = usePlatforms();
 
   const handleSelectPlatform = (platform: Platform) => {
-    onSelectPlatform(platform);
+    onSelectPlatform(platform.id);
     setSelectedPlatformName(platform.name);
   };
 

@@ -1,11 +1,11 @@
 import { Button, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
-import { Platform } from "../hooks/usePlatforms";
+import usePlatforms, { Platform } from "../hooks/usePlatforms";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import PlatformSelector from "./PlatformSelector";
-import { Genre } from "../hooks/useGenres";
+import useGenres, { Genre } from "../hooks/useGenres";
 import SortSelector from "./SortSelector";
 import { GameQuery } from "@/App";
 import React from "react";
@@ -17,19 +17,24 @@ interface Props {
   // selectedPlatform: Platform | null;
   // searchText: string;
   // selectedOrderBy: string;
-  onSelectPlatform: (platform: Platform) => void;
+  onSelectPlatform: (platformId: number) => void;
   onSelectOrderBy: (selectedOrderBy: string) => void;
 }
 
 const GameGrid = ({ gameQuery, onSelectPlatform, onSelectOrderBy }: Props) => {
   const { data: games, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGames(gameQuery);
+  const { data: platforms } = usePlatforms();
+  const { data: genres } = useGenres();
+
+  const selectedGenre = genres?.results.find((genre) => genre.id === gameQuery.genreId);
+  const selectedPlatform = platforms?.results.find((platform) => platform.id === gameQuery.platformId);
 
   return (
     <>
       <Heading marginLeft={"10px"} marginBottom={"10px"} padding={"10px 0"} fontSize={"40px"} fontWeight={"bold"}>
-        {gameQuery.platform?.name} {gameQuery.genre?.name} Games
+        {selectedPlatform?.name} {selectedGenre?.name} Games
       </Heading>
-      <PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={onSelectPlatform} />
+      <PlatformSelector selectedPlatformId={gameQuery.platformId} onSelectPlatform={onSelectPlatform} />
       <SortSelector selectedOrderBy={gameQuery.sortOrder} onSelectOrder={onSelectOrderBy} />
       {error && <Text>{error.message}</Text>}
 
@@ -69,7 +74,9 @@ const GameGrid = ({ gameQuery, onSelectPlatform, onSelectOrderBy }: Props) => {
           ))}
       </SimpleGrid>
       {/* </InfiniteScroll> */}
-      <Button onClick={() => fetchNextPage()}>{isFetchingNextPage ? "Loading..." : "Load More"}</Button>
+      {hasNextPage && (
+        <Button onClick={() => fetchNextPage()}>{isFetchingNextPage ? "Loading..." : "Load More"}</Button>
+      )}
     </>
   );
 };
