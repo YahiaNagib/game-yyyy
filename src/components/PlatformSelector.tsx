@@ -1,20 +1,20 @@
-import React, { useState } from "react";
 import usePlatforms, { Platform } from "../hooks/usePlatforms";
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
+import useGameQueryStore from "../store";
 
-interface Props {
-  selectedPlatformId: number;
-  onSelectPlatform: (platformId: number) => void;
-}
-
-const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
-  const [selectedPlatformName, setSelectedPlatformName] = useState("Platforms");
+const PlatformSelector = () => {
+  // const [selectedPlatformName, setSelectedPlatformName] = useState("Platforms");
   const { data: platforms } = usePlatforms();
 
+  const setSelectedPlatformId = useGameQueryStore((s) => s.setPlatformId);
+  const selectedPlatformId = useGameQueryStore((s) => s.gameQuery.platformId);
+
+  const selectedPlatform = platforms?.results.find((platform) => platform.id === selectedPlatformId);
+
   const handleSelectPlatform = (platform: Platform) => {
-    onSelectPlatform(platform.id);
-    setSelectedPlatformName(platform.name);
+    setSelectedPlatformId(platform.id);
+    // setSelectedPlatformName(platform.name);
   };
 
   return (
@@ -29,7 +29,7 @@ const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
           outline={"none"}
           padding={"18px"}
         >
-          {selectedPlatformName}
+          {selectedPlatform?.name || "Platforms"}
           <FaChevronDown style={{ width: "14px", height: "14px" }} />
         </Button>
       </Menu.Trigger>
