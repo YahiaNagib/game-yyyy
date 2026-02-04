@@ -25,14 +25,14 @@ function App() {
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`,
+        base: `"main"`,
+        lg: `"aside main"`,
       }}
       gap={"12px"}
     >
-      <GridItem area="nav">
+      {/* <GridItem area="nav">
         <Navbar />
-      </GridItem>
+      </GridItem> */}
       <GridItem area="aside" display={{ base: "none", lg: "block" }}>
         <GenreList />
       </GridItem>
