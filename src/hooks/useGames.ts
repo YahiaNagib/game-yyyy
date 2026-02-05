@@ -7,11 +7,13 @@ import useGameQueryStore from "../store";
 export interface Game {
   id: number;
   name: string;
+  slug: string;
   background_image: string;
   parent_platforms: { platform: Platform }[]; // array of objects, each object has a property called platform
   // and this property is of type Platform.
   metacritic: number;
   rating_top: number;
+  description_raw: string;
 }
 
 const apiClient = new APIClient<Game>("/games");
