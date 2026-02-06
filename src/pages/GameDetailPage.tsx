@@ -4,6 +4,7 @@ import useGame from "../hooks/useGame";
 import { Button, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import GameScreenshots from "../components/gameScreenshots";
 
 const GameDetailPage = () => {
   const [expanded, setExpanded] = useState(false);
@@ -58,7 +59,9 @@ const GameDetailPage = () => {
         </div>
       </SimpleGrid>
 
-      <GameTrailer id={game.id} />
+      {/* <GameTrailer id={game.id} /> */}
+
+      <GameScreenshots id={game.id} />
     </>
   );
 };

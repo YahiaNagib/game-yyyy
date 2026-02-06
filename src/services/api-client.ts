@@ -33,6 +33,10 @@ class APIClient<T> {
   getMovie = (id: number) => {
     return axiosInstance.get(this.endpoint + "/" + id + "/movies").then((res) => res.data);
   };
+
+  getScreenshots = (id: number) => {
+    return axiosInstance.get(this.endpoint + "/" + id + "/screenshots").then((res) => res.data);
+  };
 }
 
 export default APIClient;
