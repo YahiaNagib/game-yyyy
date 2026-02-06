@@ -10,7 +10,7 @@ const GameScreenshots = (props: { id: number }) => {
   if (error) throw error;
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} gap={10}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} gap={5}>
       {screenshots?.results.map((image) => (
         <Image margin={5} key={image.id} src={image.image}></Image>
       ))}

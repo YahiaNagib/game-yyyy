@@ -23,45 +23,48 @@ const GameDetailPage = () => {
 
   return (
     <>
-      <Heading fontSize="40px" marginBottom="15px">
-        {game.name}
-      </Heading>
-      <Text display="inline" marginBottom="15px">
-        {expanded ? game.description_raw : game.description_raw.substring(0, 300) + "..."}
-      </Text>
+      <SimpleGrid columns={{ base: 1, md: 2 }}>
+        <div>
+          <Heading fontSize="40px" marginBottom="15px">
+            {game.name}
+          </Heading>
+          <Text display="inline" marginBottom="15px">
+            {expanded ? game.description_raw : game.description_raw.substring(0, 300) + "..."}
+          </Text>
 
-      <Button fontWeight="bold" size="xs" marginLeft="20px" onClick={handleClick}>
-        {expanded ? "Show Less" : "Show More"}{" "}
-      </Button>
-
-      <SimpleGrid columns={2} marginTop={10}>
-        <div>
-          <Heading>Platforms</Heading>
-          {game.parent_platforms.map(({ platform }) => (
-            <Text key={platform.id}>{platform.name}</Text>
-          ))}
+          <Button fontWeight="bold" size="xs" marginLeft="20px" onClick={handleClick}>
+            {expanded ? "Show Less" : "Show More"}{" "}
+          </Button>
         </div>
+        <GameTrailer id={game.id} />
         <div>
-          <Heading>Metascore</Heading>
-          <CriticScore score={game.metacritic} />
+          <SimpleGrid columns={2} marginTop={10}>
+            <div>
+              <Heading>Platforms</Heading>
+              {game.parent_platforms.map(({ platform }) => (
+                <Text key={platform.id}>{platform.name}</Text>
+              ))}
+            </div>
+            <div>
+              <Heading>Metascore</Heading>
+              <CriticScore score={game.metacritic} />
+            </div>
+            <div>
+              <Heading>Genres</Heading>
+              {game.genres.map((genre) => (
+                <Text key={genre.id}>{genre.name}</Text>
+              ))}
+            </div>
+            <div>
+              <Heading>Publishers</Heading>
+              {game.publishers.map((publisher) => (
+                <Text key={publisher.id}>{publisher.name}</Text>
+              ))}
+            </div>
+          </SimpleGrid>
         </div>
-        <div>
-          <Heading>Genres</Heading>
-          {game.genres.map((genre) => (
-            <Text key={genre.id}>{genre.name}</Text>
-          ))}
-        </div>
-        <div>
-          <Heading>Publishers</Heading>
-          {game.publishers.map((publisher) => (
-            <Text key={publisher.id}>{publisher.name}</Text>
-          ))}
-        </div>
+        <GameScreenshots id={game.id} />
       </SimpleGrid>
-
-      {/* <GameTrailer id={game.id} /> */}
-
-      <GameScreenshots id={game.id} />
     </>
   );
 };
