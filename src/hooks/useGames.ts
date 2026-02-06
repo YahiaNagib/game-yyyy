@@ -3,11 +3,14 @@ import { Platform } from "./usePlatforms";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "../services/api-client";
 import useGameQueryStore from "../store";
+import { Genre } from "./useGenres";
 
 export interface Game {
   id: number;
   name: string;
   slug: string;
+  genres: Genre[];
+  publishers: { id: number; name: string }[];
   background_image: string;
   parent_platforms: { platform: Platform }[]; // array of objects, each object has a property called platform
   // and this property is of type Platform.

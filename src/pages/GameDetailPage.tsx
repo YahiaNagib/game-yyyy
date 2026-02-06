@@ -1,5 +1,6 @@
+import CriticScore from "../components/CriticScore";
 import useGame from "../hooks/useGame";
-import { Button, Heading, Spinner, Text } from "@chakra-ui/react";
+import { Button, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -30,6 +31,31 @@ const GameDetailPage = () => {
       <Button fontWeight="bold" size="xs" marginLeft="20px" onClick={handleClick}>
         {expanded ? "Show Less" : "Show More"}{" "}
       </Button>
+
+      <SimpleGrid columns={2} marginTop={10}>
+        <div>
+          <Heading>Platforms</Heading>
+          {game.parent_platforms.map(({ platform }) => (
+            <Text key={platform.id}>{platform.name}</Text>
+          ))}
+        </div>
+        <div>
+          <Heading>Metascore</Heading>
+          <CriticScore score={game.metacritic} />
+        </div>
+        <div>
+          <Heading>Genres</Heading>
+          {game.genres.map((genre) => (
+            <Text key={genre.id}>{genre.name}</Text>
+          ))}
+        </div>
+        <div>
+          <Heading>Publishers</Heading>
+          {game.publishers.map((publisher) => (
+            <Text key={publisher.id}>{publisher.name}</Text>
+          ))}
+        </div>
+      </SimpleGrid>
     </>
   );
 };

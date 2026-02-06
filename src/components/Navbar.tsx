@@ -2,6 +2,7 @@ import { HStack, Image, Text } from "@chakra-ui/react";
 import logo from "../assets/logo.webp";
 import { useColorMode, ColorModeButton } from "./ui/color-mode";
 import SearchInput from "./SearchInput";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { colorMode } = useColorMode();
@@ -9,7 +10,9 @@ const Navbar = () => {
   return (
     <div>
       <HStack justifyContent="space-between" marginBottom={"10px"}>
-        <Image src={logo} boxSize="60px" />
+        <Link to="/">
+          <Image src={logo} boxSize="60px" />
+        </Link>
         <SearchInput />
         <HStack>
           <ColorModeButton />
