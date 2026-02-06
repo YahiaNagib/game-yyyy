@@ -1,3 +1,4 @@
+import GameTrailer from "../components/GameTrailer";
 import CriticScore from "../components/CriticScore";
 import useGame from "../hooks/useGame";
 import { Button, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
@@ -56,6 +57,8 @@ const GameDetailPage = () => {
           ))}
         </div>
       </SimpleGrid>
+
+      <GameTrailer id={game.id} />
     </>
   );
 };
