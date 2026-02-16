@@ -4,7 +4,7 @@ import useGame from "../hooks/useGame";
 import { Button, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import GameScreenshots from "../components/gameScreenshots";
+import GameScreenshots from "../components/GameScreenshots";
 
 const GameDetailPage = () => {
   const [expanded, setExpanded] = useState(false);

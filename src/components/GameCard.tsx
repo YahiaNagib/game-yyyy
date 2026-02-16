@@ -16,6 +16,10 @@ const GameCard = ({ game }: Props) => {
   //   return game.parent_platforms.map((p) => p.platform);
   // };
 
+  const getParentPlatforms = () => {
+    if (game.parent_platforms) return game.parent_platforms.map((p) => p.platform);
+  };
+
   return (
     <Card.Root
 
@@ -26,7 +30,7 @@ const GameCard = ({ game }: Props) => {
       </Card.Header>
       <Card.Body alignItems="flex-start">
         <HStack justifyContent="space-between" width="100%">
-          <PlatformIconList platforms={game.parent_platforms.map((p) => p.platform)} />
+          <PlatformIconList platforms={getParentPlatforms()} />
           <CriticScore score={game.metacritic} />
         </HStack>
         <Heading fontSize="2xl" fontWeight={"bold"} marginBottom={"5px"}>
