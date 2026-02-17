@@ -22,14 +22,18 @@ import useGameQueryStore from "../store";
 // }
 
 const GameGrid = () => {
+  // find all games
   const { data: games, error, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useGames();
 
+  // the id of the selected genre and platform
   const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
   const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
 
+  // find all genres and platforms
   const { data: genres } = useGenres();
   const { data: platforms } = usePlatforms();
 
+  // find the selected genre and platform (to use their name in the heading)
   const selectedGenre = genres?.results.find((genre) => genre.id === genreId);
   const selectedPlatform = platforms?.results.find((platform) => platform.id === platformId);
 
