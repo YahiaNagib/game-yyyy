@@ -1,4 +1,4 @@
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import usePlatforms from "../hooks/usePlatforms";
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import useGameQueryStore from "../store";
@@ -12,8 +12,8 @@ const PlatformSelector = () => {
 
   const selectedPlatform = platforms?.results.find((platform) => platform.id === selectedPlatformId);
 
-  const handleSelectPlatform = (platform: Platform) => {
-    setSelectedPlatformId(platform.id);
+  const handleSelectPlatform = (platformId: number) => {
+    setSelectedPlatformId(platformId);
     // setSelectedPlatformName(platform.name);
   };
 
@@ -36,7 +36,13 @@ const PlatformSelector = () => {
       <Portal>
         <Menu.Positioner>
           <Menu.Content width={"230px"}>
-            <Menu.Item value="All" fontSize="15px" padding={"8px"} cursor={"pointer"}>
+            <Menu.Item
+              value="All"
+              fontSize="15px"
+              padding={"8px"}
+              cursor={"pointer"}
+              onClick={() => handleSelectPlatform(-1)}
+            >
               All
             </Menu.Item>
             {platforms?.results.map((platform) => (
@@ -46,7 +52,7 @@ const PlatformSelector = () => {
                 fontSize="15px"
                 padding={"8px"}
                 cursor={"pointer"}
-                onClick={() => handleSelectPlatform(platform)}
+                onClick={() => handleSelectPlatform(platform.id)}
               >
                 {platform.name}
               </Menu.Item>
