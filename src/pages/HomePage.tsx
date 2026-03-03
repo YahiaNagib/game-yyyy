@@ -10,6 +10,10 @@ const HomePage = () => {
         base: `"main"`,
         lg: `"aside main"`,
       }}
+      templateColumns={{
+        base: "1fr",
+        lg: "200px 1fr",
+      }}
       gap={"12px"}
     >
       <GridItem area="aside" display={{ base: "none", lg: "block" }}>

@@ -1,8 +1,9 @@
 import "./App.css";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
+import GameGridHeader from "./components/GameGridHeader";
 
 export interface GameQuery {
   genreId: number;
@@ -37,6 +38,9 @@ function App() {
         <GenreList />
       </GridItem>
       <GridItem area="main">
+        <Box>
+          <GameGridHeader />
+        </Box>
         <GameGrid />
       </GridItem>
     </Grid>

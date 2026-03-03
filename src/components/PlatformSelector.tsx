@@ -1,5 +1,5 @@
 import usePlatforms from "../hooks/usePlatforms";
-import { Button, Menu, Portal } from "@chakra-ui/react";
+import { Button, Checkbox, Menu, Portal } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import useGameQueryStore from "../store";
 
@@ -18,7 +18,7 @@ const PlatformSelector = () => {
   };
 
   return (
-    <Menu.Root>
+    <Menu.Root closeOnSelect={false}>
       <Menu.Trigger asChild>
         <Button
           variant="subtle"
@@ -54,7 +54,11 @@ const PlatformSelector = () => {
                 cursor={"pointer"}
                 onClick={() => handleSelectPlatform(platform.id)}
               >
-                {platform.name}
+                <Checkbox.Root checked={platform.id === selectedPlatform?.id}>
+                  <Checkbox.HiddenInput />
+                  <Checkbox.Control />
+                  <Checkbox.Label>{platform.name}</Checkbox.Label>
+                </Checkbox.Root>
               </Menu.Item>
             ))}
           </Menu.Content>

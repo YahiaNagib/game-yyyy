@@ -51,11 +51,11 @@ const GameGrid = () => {
         next={fetchNextPage}
         hasMore={hasNextPage}
         loader={<Spinner />}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>End</b>
-          </p>
-        }
+        // endMessage={
+        //   <p style={{ textAlign: "center" }}>
+        //     <b>End</b>
+        //   </p>
+        // }
       >
         <SimpleGrid columns={{ lg: 3, sm: 1, md: 2, xl: 4 }} padding="10px" gap="20px">
           {isLoading && (

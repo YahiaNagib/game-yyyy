@@ -9,6 +9,7 @@ interface GameQuery {
 
 interface GameQueryStore {
   gameQuery: GameQuery;
+  resetQuery: () => void;
   setSearchText: (searchText: string) => void;
   setGenreId: (genreId: number) => void;
   setPlatformId: (PlatformId: number) => void;
@@ -17,6 +18,7 @@ interface GameQueryStore {
 
 const useGameQueryStore = create<GameQueryStore>((set) => ({
   gameQuery: {},
+  resetQuery: () => set(() => ({ gameQuery: {} })),
   setSearchText: (searchText) => set(() => ({ gameQuery: { searchText } })),
   setGenreId: (genreId) => set((store) => ({ gameQuery: { ...store.gameQuery, genreId } })),
   setPlatformId: (platformId) =>
