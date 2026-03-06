@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 interface GameQuery {
   genreId?: number;
-  platformId?: number;
+  platformIds?: number[];
   sortOrder?: string;
   searchText?: string;
 }
@@ -12,7 +12,7 @@ interface GameQueryStore {
   resetQuery: () => void;
   setSearchText: (searchText: string) => void;
   setGenreId: (genreId: number) => void;
-  setPlatformId: (PlatformId: number) => void;
+  setPlatformId: (platformId: number) => void;
   setSortOrder: (sortOrder: string) => void;
 }
 
@@ -26,7 +26,20 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
       if (platformId === -1) {
         return { gameQuery: { genreId: store.gameQuery.genreId, sortOrder: store.gameQuery.sortOrder } };
       }
-      return { gameQuery: { ...store.gameQuery, platformId } };
+      const selectedPlatformIds = store.gameQuery.platformIds
+        ? store.gameQuery.platformIds.includes(platformId)
+          ? store.gameQuery.platformIds.filter((id) => id !== platformId)
+          : [platformId, ...store.gameQuery.platformIds]
+        : [platformId];
+
+      console.log(selectedPlatformIds);
+
+      if (selectedPlatformIds.length === 0)
+        return { gameQuery: { genreId: store.gameQuery.genreId, sortOrder: store.gameQuery.sortOrder } };
+
+      return {
+        gameQuery: { ...store.gameQuery, platformIds: [...selectedPlatformIds] },
+      };
     }),
   setSortOrder: (sortOrder) => set((store) => ({ gameQuery: { ...store.gameQuery, sortOrder } })),
 }));

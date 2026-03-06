@@ -8,9 +8,9 @@ const PlatformSelector = () => {
   const { data: platforms } = usePlatforms();
 
   const setSelectedPlatformId = useGameQueryStore((s) => s.setPlatformId);
-  const selectedPlatformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  const selectedPlatformIds = useGameQueryStore((s) => s.gameQuery.platformIds);
 
-  const selectedPlatform = platforms?.results.find((platform) => platform.id === selectedPlatformId);
+  // const selectedPlatform = platforms?.results.filter((platform) => selectedPlatformIds?.includes(platform.id));
 
   const handleSelectPlatform = (platformId: number) => {
     setSelectedPlatformId(platformId);
@@ -29,7 +29,8 @@ const PlatformSelector = () => {
           outline={"none"}
           padding={"18px"}
         >
-          {selectedPlatform?.name || "Platforms"}
+          {/* {selectedPlatform?.name || "Platforms"} */}
+          Platforms
           <FaChevronDown style={{ width: "14px", height: "14px" }} />
         </Button>
       </Menu.Trigger>
@@ -54,7 +55,7 @@ const PlatformSelector = () => {
                 cursor={"pointer"}
                 onClick={() => handleSelectPlatform(platform.id)}
               >
-                <Checkbox.Root checked={platform.id === selectedPlatform?.id}>
+                <Checkbox.Root checked={selectedPlatformIds ? selectedPlatformIds.includes(platform.id) : false}>
                   <Checkbox.HiddenInput />
                   <Checkbox.Control />
                   <Checkbox.Label>{platform.name}</Checkbox.Label>

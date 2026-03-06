@@ -27,7 +27,7 @@ const GameGrid = () => {
 
   // the id of the selected genre and platform
   const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
-  const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
+  // const platformId = useGameQueryStore((s) => s.gameQuery.platformIds);
 
   // find all genres and platforms
   const { data: genres } = useGenres();
@@ -35,12 +35,13 @@ const GameGrid = () => {
 
   // find the selected genre and platform (to use their name in the heading)
   const selectedGenre = genres?.results.find((genre) => genre.id === genreId);
-  const selectedPlatform = platforms?.results.find((platform) => platform.id === platformId);
+  // const selectedPlatform = platforms?.results.find((platform) => platform.id === platformId);
 
   return (
     <>
       <Heading marginLeft={"10px"} marginBottom={"10px"} padding={"10px 0"} fontSize={"40px"} fontWeight={"bold"}>
-        {selectedPlatform?.name} {selectedGenre?.name} Games
+        {/* {selectedPlatform?.name} */}
+        {selectedGenre?.name} Games
       </Heading>
       <PlatformSelector />
       <SortSelector />
