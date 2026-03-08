@@ -46,7 +46,7 @@ const GameGrid = () => {
       <PlatformSelector />
       <SortSelector />
       {error && <Text>{error.message}</Text>}
-
+      {games?.pages.reduce((total, page) => total + page.results.length, 0)}
       <InfiniteScroll
         dataLength={games?.pages.reduce((total, page) => total + page.results.length, 0) || 0}
         next={fetchNextPage}
